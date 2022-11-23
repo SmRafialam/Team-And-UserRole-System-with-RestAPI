@@ -1,9 +1,16 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
+const bodyParser = require('body-parser');
 
 const app = express()
 dotenv.config()
+
+const routerV1 = require('./router/routerV1');
+
+//middleware
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json()); 
 
 // database connection
 mongoose.connect(process.env.DB_URl, {useNewUrlParser: true, useUnifiedTopology: true})
@@ -16,3 +23,10 @@ mongoose.connect(process.env.DB_URl, {useNewUrlParser: true, useUnifiedTopology:
 .catch(err=> {
     console.log(err)
 })
+
+
+app.get('/',(req,res)=>{
+  res.json({message:'okay'})
+});
+
+app.use('/api/v1',routerV1);
