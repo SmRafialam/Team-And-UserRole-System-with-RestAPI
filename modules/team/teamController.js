@@ -3,7 +3,9 @@ const { add, getLists, getOne, editTeam, deleteOne } = require("./teamService")
 
 
 const createTeam = async(req,res)=>{
-  const response = await add(req.body, req.query)
+  const reqData = req.body;
+//   console.log(reqData)
+  const response = await add(reqData)
     
     if(response.status === 200 ) {
         res.json(response)
@@ -16,8 +18,8 @@ const createTeam = async(req,res)=>{
     }
 }
 
-const getTeam = async(req,res)=>{
-  const response = await getLists( req.query)
+const getTeam = async(req, res)=>{
+  const response = await getLists()
     
     if(response.status === 200 ) {
         res.json(response)
@@ -31,7 +33,7 @@ const getTeam = async(req,res)=>{
 }
 
 const getTeamById = async(req,res)=>{
-  const response = await getOne( req.query)
+  const response = await getOne(req.params.id)
     
     if(response.status === 200 ) {
         res.json(response)
@@ -45,7 +47,8 @@ const getTeamById = async(req,res)=>{
 }
 
 const updateTeam = async(req,res)=>{
-  const response = await editTeam( req.params.id, req.body, req.query)
+
+    const response = await editTeam( req.params.id, req.body )
     
     if(response.status === 200 ) {
         res.json(response)
