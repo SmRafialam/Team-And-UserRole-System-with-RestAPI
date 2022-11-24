@@ -1,16 +1,20 @@
 const teamModel = require('./teamModel')
+const userModel = require('../user/userModel')
+
 
 const add = async(teamObj)=>{
   // console.log(teamObj)
   try{
     const team = new teamModel({
-      name: teamObj.name
+      name: teamObj.name,
+      users: [teamObj.users]
     });
 
     const createdTeam = await team.save();
+
     teamData = {
       id: createdTeam.id,
-      name: createdTeam.name
+      name: createdTeam.name,
     }
     return {data: {teamData}, success: 'Team Added Successfully', status: 200}
 

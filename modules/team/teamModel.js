@@ -5,7 +5,12 @@ const teamSchema = mongoose.Schema({
   name: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
+  },
+  users: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: 'userModel',
+    default: []
 
   }
 
