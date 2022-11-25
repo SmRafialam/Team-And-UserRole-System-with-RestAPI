@@ -1,5 +1,4 @@
 const userModel = require('./userModel')
-const teamModel = require('../team/teamModel')
 
 const addUser = async(UserObj)=>{
   console.log(UserObj)
@@ -33,7 +32,11 @@ const getUserLists = async()=>{
     const modifiedUserList = UserLists.map(User=> {
       return {
         id: User.id,
-        name: User.name
+        firstName: User.firstName,
+        lastName: User.lastName,
+        email: User.email,
+        password: User.password,
+        teams: [User.teams]
       }
     })
     return {data: [modifiedUserList], status: 200}

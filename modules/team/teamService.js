@@ -30,7 +30,8 @@ const getLists = async()=>{
     const modifiedTeamList = teamLists.map(team=> {
       return {
         id: team.id,
-        name: team.name
+        name: team.name,
+        users: team.users
       }
     })
     return {data: [modifiedTeamList], status: 200}
@@ -64,12 +65,7 @@ const getOne = async(teamID)=>{
 
 const editTeam = async(teamId,teamData)=>{
   try{
-    // const result = await teamModel.findOne({name: teamData.name})
-    //     if(result !== null) {
-    //         if(result.id !== teamId) {
-    //             throw Error(`${result.name} team is already exist`)
-    //         }
-    //     }
+    
     const team = await teamModel.findByIdAndUpdate(teamId,{
      ...teamData
       
@@ -77,7 +73,8 @@ const editTeam = async(teamId,teamData)=>{
     console.log(team);
     updateTeamData = {
       id: team.id,
-      name: team.name
+      name: team.name,
+      users: [team.users]
     }
 
     return {data: [updateTeamData], status: 200}
