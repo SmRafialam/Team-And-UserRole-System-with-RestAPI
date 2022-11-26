@@ -16,7 +16,7 @@ const add = async(teamObj)=>{
       id: createdTeam.id,
       name: createdTeam.name,
     }
-    return {data: {teamData}, success: 'Team Added Successfully', status: 200}
+    return {data: teamData, success: 'Team Added Successfully', status: 200}
 
   }
   catch(err){
@@ -34,7 +34,7 @@ const getLists = async()=>{
         users: team.users
       }
     })
-    return {data: [modifiedTeamList], status: 200}
+    return {data: modifiedTeamList, status: 200}
 
   }
   catch(err){
@@ -43,18 +43,19 @@ const getLists = async()=>{
   }
 }
 
-const getOne = async(teamID)=>{
+const getOne = async(teamId)=>{
   try{
-    const team = await teamModel.findById(teamID);
+    const team = await teamModel.findById(teamId);
 
     // const modifiedUpdateTeamList = team.map(updateTeam=> {
     //   return {
     //     id: updateTeam.id,
-    //     name: updateTeam.name
+    //     name: updateTeam.name,
+    //     users: [updateTeam.users]
     //   }
     // })
     // console.log(modifiedUpdateTeamList)
-    return {data: [team], status: 200}
+    return {data: team, status: 200}
 
   }
   catch(err){
@@ -77,7 +78,7 @@ const editTeam = async(teamId,teamData)=>{
       users: [team.users]
     }
 
-    return {data: [updateTeamData], status: 200}
+    return {data: updateTeamData, status: 200}
   }
   catch(err){
     return {msg: err.message, status: 500}
@@ -89,7 +90,7 @@ const deleteOne = async(teamID)=>{
   try{
     const team = await teamModel.findByIdAndRemove(teamID)
     console.log(team + " - Removed succesfully");
-    return {data: [team], status: 200}
+    return {data: team, status: 200}
   }
   catch(err){
     return {msg: err.message, status: 500}

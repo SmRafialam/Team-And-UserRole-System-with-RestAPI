@@ -9,6 +9,7 @@ dotenv.config()
 const routerV1 = require('./router/routerV1');
 
 //middleware
+const { notFoundHandler, errorHandler } = require('./middleware/common/errorHandler');
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json()); 
 
@@ -24,9 +25,15 @@ mongoose.connect(process.env.DB_URl, {useNewUrlParser: true, useUnifiedTopology:
     console.log(err)
 })
 
-
+//router
 app.get('/',(req,res)=>{
   res.json({message:'okay'})
 });
 
 app.use('/api/v1',routerV1);
+
+//not found handler
+app.use(notFoundHandler);
+
+//error handler
+app.use(errorHandler);
