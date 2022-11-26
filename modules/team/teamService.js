@@ -1,4 +1,4 @@
-const teamModel = require('./teamModel')
+const teamModel = require('./teamModel');
 const userModel = require('../user/userModel')
 
 
@@ -86,9 +86,9 @@ const editTeam = async(teamId,teamData)=>{
   }
 }
 
-const deleteOne = async(teamID)=>{
+const deleteOne = async(teamId)=>{
   try{
-    const team = await teamModel.findByIdAndRemove(teamID)
+    const team = await teamModel.findByIdAndRemove(teamId)
     console.log(team + " - Removed succesfully");
     return {data: team, status: 200}
   }

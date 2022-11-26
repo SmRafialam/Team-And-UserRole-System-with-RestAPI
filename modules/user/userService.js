@@ -18,7 +18,7 @@ const addUser = async(UserObj)=>{
       teams: [createdUser.teams]
 
     }
-    return {data: {UserData}, success: 'User Added Successfully', status: 200}
+    return {data: UserData, success: 'User Added Successfully', status: 200}
 
   }
   catch(err){
@@ -39,7 +39,7 @@ const getUserLists = async()=>{
         teams: [User.teams]
       }
     })
-    return {data: [modifiedUserList], status: 200}
+    return {data: modifiedUserList, status: 200}
 
   }
   catch(err){
@@ -59,7 +59,7 @@ const getOneUser = async(UserID)=>{
     //   }
     // })
     // console.log(modifiedUpdateUserList)
-    return {data: [User], status: 200}
+    return {data: User, status: 200}
 
   }
   catch(err){
@@ -93,7 +93,7 @@ const deleteOneUser = async(UserID)=>{
   try{
     const User = await userModel.findByIdAndRemove(UserID)
     console.log(User + " - Removed succesfully");
-    return {data: [User], status: 200}
+    return {data: User, status: 200}
   }
   catch(err){
     return {msg: err.message, status: 500}
